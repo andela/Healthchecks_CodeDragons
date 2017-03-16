@@ -1,1 +1,1 @@
-python manage.py migrate && python manage.py runserver
+web: gunicorn python manage.py migrate && python manage.py runserver
