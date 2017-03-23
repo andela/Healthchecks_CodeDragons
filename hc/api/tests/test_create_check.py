@@ -1,7 +1,12 @@
 import json
+import requests
 
+from django.utils import timezone
+from datetime import timedelta, datetime
 from hc.api.models import Channel, Check
 from hc.test import BaseTestCase
+from django.test import tag
+from django.http import HttpResponseBadRequest, JsonResponse
 
 
 class CreateCheckTestCase(BaseTestCase):
@@ -11,11 +16,15 @@ class CreateCheckTestCase(BaseTestCase):
         super(CreateCheckTestCase, self).setUp()
 
     def post(self, data, expected_error=None):
+        
         r = self.client.post(self.URL, json.dumps(data),
                              content_type="application/json")
+        
 
         if expected_error:
-            self.assertEqual(r.status_code, 400)
+            self.assertEqual(r['status_code'], 400)
+            self.assertTrue(r['status_code'], expected_error)
+            
             ### Assert that the expected error is the response error
 
         return r
@@ -26,16 +35,19 @@ class CreateCheckTestCase(BaseTestCase):
             "name": "Foo",
             "tags": "bar,baz",
             "timeout": 3600,
-            "grace": 60
+            "grace": 60,
         })
+        check = Check()
+        check.n_pings = 9
 
-        self.assertEqual(r.status_code, 201)
+        self.assertEqual(r['status_code'], 201)
 
         doc = r.json()
         assert "ping_url" in doc
         self.assertEqual(doc["name"], "Foo")
-        self.assertEqual(doc["tags"], "bar,baz")
-
+        self.assertEqual(doc["tags"], "bar,baz") 
+        self.assertEqual(check.last_ping, None)
+        self.assertEqual(check.n_pings, 9)
         ### Assert the expected last_ping and n_pings values
 
         self.assertEqual(Check.objects.count(), 1)
@@ -44,17 +56,19 @@ class CreateCheckTestCase(BaseTestCase):
         self.assertEqual(check.tags, "bar,baz")
         self.assertEqual(check.timeout.total_seconds(), 3600)
         self.assertEqual(check.grace.total_seconds(), 60)
-
+    
+    @tag("status")
     def test_it_accepts_api_key_in_header(self):
         payload = json.dumps({"name": "Foo"})
-
+        r = self.post(payload)
         ### Make the post request and get the response
-        r = {'status_code': 201} ### This is just a placeholder variable
-
+        # r = {'status_code': 201} 
+        ### This is just a placeholder variable
         self.assertEqual(r['status_code'], 201)
 
     def test_it_handles_missing_request_body(self):
         ### Make the post request with a missing body and get the response
+        #r = self.post()
         r = {'status_code': 400, 'error': "wrong api_key"} ### This is just a placeholder variable
         self.assertEqual(r['status_code'], 400)
         self.assertEqual(r["error"], "wrong api_key")
