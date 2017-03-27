@@ -84,10 +84,9 @@ class PingTestCase(TestCase):
         assert r.status_code == 200
     ### Test that the csrf_client head works
 
-    @tag("pause_status")
     def test_csrf_client(self):
         csrf_client = Client(enforce_csrf_checks=True)
-        r = self.csrf_client.client.get("/ping/%s/" % self.check.code)
+        r = self.csrf_client.client.post("/ping/%s/" % self.check.code)
         assert r.status_code == 200
 
 
