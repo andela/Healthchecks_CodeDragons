@@ -223,3 +223,7 @@ class NotifyTestCase(BaseTestCase):
         self.assertEqual(json["message_type"], "CRITICAL")
 
     ### Test that the web hooks handle connection errors and error 500s
+
+    def test_web_hooks_handle_connection_errors(self):
+        r = self.client.get("")
+
