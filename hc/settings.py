@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "localhost"
 SECRET_KEY = "---"
 DEBUG = True
-ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com/']
+ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
 DEFAULT_FROM_EMAIL = 'healthchecks@example.org'
 USE_PAYMENTS = False
 
@@ -154,7 +154,7 @@ PUSHBULLET_CLIENT_SECRET = None
 #     warnings.warn("local_settings.py not found, using defaults")
 
 # # Allow all host hosts/domain names for this site
-ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com/']
+ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
 
 # Parse database configuration from $DATABASE_URL
 # DATABASES = {'default': dj_database_url.config()}
