@@ -25,7 +25,6 @@ class CreateCheckTestCase(BaseTestCase):
             self.assertEqual(r.status_code, 400)
             self.assertTrue(r.status_code, expected_error)
             self.assertIn(response_error, r.json())
-
             ### Assert that the expected error is the response error
 
         return r
@@ -57,8 +56,7 @@ class CreateCheckTestCase(BaseTestCase):
         self.assertEqual(check.tags, "bar,baz")
         self.assertEqual(check.timeout.total_seconds(), 3600)
         self.assertEqual(check.grace.total_seconds(), 60)
-    
-    @tag("status")
+
     def test_it_accepts_api_key_in_header(self):
         payload = json.dumps({"name": "Foo"})
         r = self.post(payload)

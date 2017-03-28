@@ -64,7 +64,7 @@ class PingTestCase(TestCase):
         ping = Ping.objects.latest("id")
         ### Assert the expected response status code and ping's scheme
         assert r.status_code == 200
-        assert ping.remote_addr == "1.1.1.1"
+        assert ping.remote_addr == "127.0.0.1"
 
     def test_it_never_caches(self):
         r = self.client.get("/ping/%s/" % self.check.code)

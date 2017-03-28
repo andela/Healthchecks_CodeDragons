@@ -24,7 +24,7 @@ class PauseTestCase(BaseTestCase):
                              HTTP_X_API_KEY="abc")
 
         self.assertEqual(r.status_code, 400)
-        self.assertEqual(check.status, "paused")
+        self.assertEqual(check.status, "up")
 
         ### Test that it only allows post requests
     def test_for_post_request(self):
