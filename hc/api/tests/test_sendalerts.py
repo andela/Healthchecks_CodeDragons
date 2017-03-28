@@ -1,5 +1,5 @@
 from datetime import timedelta
-
+from django.test import tag
 from django.utils import timezone
 from hc.api.management.commands.sendalerts import Command
 from hc.api.models import Check
@@ -8,7 +8,6 @@ from mock import patch
 
 
 class SendAlertsTestCase(BaseTestCase):
-
     @patch("hc.api.management.commands.sendalerts.Command.handle_one")
     def test_it_handles_few(self, mock):
         yesterday = timezone.now() - timedelta(days=1)
@@ -26,7 +25,7 @@ class SendAlertsTestCase(BaseTestCase):
         handled_names = []
         for args, kwargs in mock.call_args_list:
             handled_names.append(args[0].name)
-
+            handled_names.sort
         assert set(names) == set(handled_names)
         ### The above assert fails. Make it pass
 
@@ -40,3 +39,5 @@ class SendAlertsTestCase(BaseTestCase):
         Command().handle_one(check)
 
     ### Assert when Command's handle many that when handle_many should return True
+
+

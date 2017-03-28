@@ -65,7 +65,7 @@ class CreateCheckTestCase(BaseTestCase):
         ### Make the post request and get the response
         # r = {'status_code': 201} 
         ### This is just a placeholder variable
-        self.assertEqual(r['status_code'], 201)
+        self.assertEqual(r.status_code, 201)
 
     def test_it_handles_missing_request_body(self):
         ### This is just a placeholder variable
@@ -74,14 +74,14 @@ class CreateCheckTestCase(BaseTestCase):
         # r= self.post()
         #r = {'status_code': 400, 'error': "wrong api_key"}
         self.assertEqual(r.status_code, 400)
-        self.assertEqual(r["error"], "wrong api_key")
+        self.assertEqual(r.error, "wrong api_key")
 
     def test_it_handles_invalid_json(self):
         # r = {'status_code': 400, 'error': "could not parse request body"} ### This is just a placeholder variable
         ### Make the post request with invalid json data type
         r = self.client.post(self.URL, "Invalid file", content_type="application/json")
         self.assertEqual(r.status_code, 400)
-        self.assertEqual(r["error"], "could not parse request body")
+        self.assertEqual(r.error, "could not parse request body")
 
     def test_it_rejects_wrong_api_key(self):
         self.post({"api_key": "wrong"},
