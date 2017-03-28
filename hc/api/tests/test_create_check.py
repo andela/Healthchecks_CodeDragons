@@ -105,7 +105,8 @@ class CreateCheckTestCase(BaseTestCase):
 
     ### Test for the 'timeout is too small' and 'timeout is too large' errors
     def test_timeout_small_error(self):
-        self.post({"api_key": "abc", "timeout": 0}, expected_error="Error, timeout too small")
+        r=self.post({"api_key": "abc", "timeout": 0}, expected_error="Error, timeout too small")
+        self.assertEqual(r.json(400),"Error, timeout too small")
 
     def test_timeout_large_error(self):
         self.post({"api_key": "abc", "timeout": 999999}, expected_error="Error, timeout too large")
