@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "localhost"
 SECRET_KEY = "---"
 DEBUG = True
-ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
+#ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
 DEFAULT_FROM_EMAIL = 'healthchecks@example.org'
 USE_PAYMENTS = False
 
@@ -155,16 +155,16 @@ PUSHBULLET_CLIENT_SECRET = None
 #     warnings.warn("local_settings.py not found, using defaults")
 
 # # Allow all host hosts/domain names for this site
-ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
+#ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
 
 # Parse database configuration from $DATABASE_URL
 # DATABASES = {'default': dj_database_url.config()}
-DATABASE_URL = 'postgresql:///postgresql'
-DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+# DATABASE_URL = 'postgresql:///postgresql'
+# DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#EMAIL_BACKEND = "djmail.backends.default.EmailBackend"
+# EMAIL_BACKEND = "djmail.backends.default.EmailBackend"
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-# SENDGRID_API_KEY = "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"
+ #SENDGRID_API_KEY = "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"
