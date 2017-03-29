@@ -28,6 +28,7 @@ rcssmin==1.0.6
 requests==2.13.0
 rjsmin==1.0.12
 sendgrid==3.6.3
+sendgrid-django==4.0.4
 six==1.10.0
 static3==0.7.0
 whitenoise==3.3.0
