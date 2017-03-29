@@ -1,10 +1,11 @@
 from datetime import timedelta
-from django.test import tag
 from django.utils import timezone
+from django.test import tag
 from hc.api.management.commands.sendalerts import Command
 from hc.api.models import Check
 from hc.test import BaseTestCase
 from mock import patch
+from django.contrib.auth.models import User
 
 
 class SendAlertsTestCase(BaseTestCase):
@@ -33,11 +34,13 @@ class SendAlertsTestCase(BaseTestCase):
         check = Check(user=self.alice, status="up")
         # 1 day 30 minutes after ping the check is in grace period:
         check.last_ping = timezone.now() - timedelta(days=1, minutes=30)
+        check.status = "up"
         check.save()
-
+        result = Command().handle_many()
         # Expect no exceptions--
         Command().handle_one(check)
+        assert result, "handle_many should return True"
+
 
     ### Assert when Command's handle many that when handle_many should return True
-
 
