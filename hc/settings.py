@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "localhost"
 SECRET_KEY = "---"
 DEBUG = True
-#ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
+ALLOWED_HOSTS = ['hc-codedragons.herokuapp.com']
 DEFAULT_FROM_EMAIL = 'healthchecks@example.org'
 USE_PAYMENTS = False
 
