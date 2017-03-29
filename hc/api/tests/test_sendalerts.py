@@ -36,11 +36,6 @@ class SendAlertsTestCase(BaseTestCase):
         check.last_ping = timezone.now() - timedelta(days=1, minutes=30)
         check.status = "up"
         check.save()
-        result = Command().handle_many()
-        # Expect no exceptions--
-        Command().handle_one(check)
-        assert result, "handle_many should return True"
-
 
     ### Assert when Command's handle many that when handle_many should return True
 
