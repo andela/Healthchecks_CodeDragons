@@ -164,6 +164,7 @@ DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-EMAIL_BACKEND = "sendgrid.sgbackend.SendGridBackend"
+EMAIL_BACKEND = "djmail.backends.default.EmailBackend"
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
 #SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 SENDGRID_API_KEY = "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"
