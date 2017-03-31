@@ -71,7 +71,51 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
+  
+
+  
+</div>
+<div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body settings-block">
+                <h2>API Access</h2>
+                {% if profile.api_key %}
+                    {% if show_api_key %}
+                        API key: <code>{{ profile.api_key }}</code>
+                        <button
+                            data-toggle="modal"
+                            data-target="#revoke-api-key-modal"
+                            class="btn btn-danger pull-right">Revoke</button>
+
+                    {% else %}
+                        <span class="icon-ok"></span>
+                        API access is enabled.
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                name="show_api_key"
+                                class="btn btn-default pull-right">Show API key</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <span class="icon-cancel"></span>
+                    API access is disabled.
+                    <form method="post">
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            name="create_api_key"
+                            class="btn btn-default pull-right">Create API key</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+      <div class="col-sm-6">
         <div class="panel panel-default">
             <div class="panel-body settings-block">
                 <h2>Team Access</h2>
@@ -130,44 +174,6 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
-        <div class="panel panel-default">
-            <div class="panel-body settings-block">
-                <h2>API Access</h2>
-                {% if profile.api_key %}
-                    {% if show_api_key %}
-                        API key: <code>{{ profile.api_key }}</code>
-                        <button
-                            data-toggle="modal"
-                            data-target="#revoke-api-key-modal"
-                            class="btn btn-danger pull-right">Revoke</button>
-
-                    {% else %}
-                        <span class="icon-ok"></span>
-                        API access is enabled.
-                        <form method="post">
-                            {% csrf_token %}
-
-                            <button
-                                type="submit"
-                                name="show_api_key"
-                                class="btn btn-default pull-right">Show API key</button>
-                        </form>
-                    {% endif %}
-                {% else %}
-                    <span class="icon-cancel"></span>
-                    API access is disabled.
-                    <form method="post">
-                        {% csrf_token %}
-                        <button
-                            type="submit"
-                            name="create_api_key"
-                            class="btn btn-default pull-right">Create API key</button>
-                    </form>
-                {% endif %}
-            </div>
-        </div>
-    </div>
 </div>
 
 {% if badge_urls %}
