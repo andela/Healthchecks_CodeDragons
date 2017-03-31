@@ -28,9 +28,22 @@
                     <label>
                         <input
                             name="reports_allowed"
-                            type="checkbox"
+                            value="daily"
+                            type="radio"
                             {% if profile.reports_allowed %} checked {% endif %}>
-                        Each month send me a summary of my checks
+                            Send me daily reports.
+                            <input
+                            name="reports_allowed"
+                            value="weekly"
+                            type="radio"
+                            {% if profile.reports_allowed %} checked {% endif %}>
+                            Send me weekly reports.
+                            <input
+                            name="reports_allowed"
+                            value="monthly"
+                            type="radio"
+                            {% if profile.reports_allowed %} checked {% endif %}>
+                            Send me monthly reports.
                     </label>
                     <button
                         name="update_reports_allowed"
