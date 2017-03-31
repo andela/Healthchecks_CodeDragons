@@ -24,7 +24,7 @@
             <div class="panel-body settings-block">
                 <form method="post">
                     {% csrf_token %}
-                    <h4>Monthly Reports</h4>
+                    <h2>Monthly Reports</h2>
                     <label>
                         <input
                             name="reports_allowed"
@@ -32,6 +32,7 @@
                             type="radio"
                             {% if profile.reports_allowed %} checked {% endif %}>
                             Send me daily reports.<br>
+
                             <input
                             name="reports_allowed"
                             value="weekly"
