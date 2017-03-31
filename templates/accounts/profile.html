@@ -30,20 +30,20 @@
                             name="reports_allowed"
                             value="daily"
                             type="radio"
-                            {% if profile.reports_allowed %} checked {% endif %}>
+                            {% if profile.reports_allowed and reports_allowed == "daily" %} checked {% endif %}>
                             Send me daily reports.<br>
 
                             <input
                             name="reports_allowed"
                             value="weekly"
                             type="radio"
-                            {% if profile.reports_allowed %} checked {% endif %}>
+                            {% if profile.reports_allowed and reports_allowed == "weekly" %} checked {% endif %}>
                             Send me weekly reports.<br>
                             <input
                             name="reports_allowed"
                             value="monthly"
                             type="radio"
-                            {% if profile.reports_allowed %} checked {% endif %}>
+                            {% if profile.reports_allowed and reports_allowed == "monthly" %} checked {% endif %}>
                             Send me monthly reports.
                     </label>
                     <button
