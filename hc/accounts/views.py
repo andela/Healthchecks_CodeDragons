@@ -161,12 +161,15 @@ def profile(request):
                 profile.reports_allowed = form.cleaned_data["reports_allowed"]
                 profile.save()
                 now = timezone.now()
+                # set next report date for daily reports
                 if profile.reports_allowed == "daily":
                     profile.next_report_date = now + timedelta(minutes=1)
                     profile.save()
+                # set next report date for weekly reports
                 if profile.reports_allowed == "weekly":
                     profile.next_report_date = now + timedelta(days=7)
                     profile.save()
+                # set next report date for monthly reports
                 if profile.reports_allowed == "monthly":
                     profile.next_report_date = now + timedelta(days=30)
                     profile.save()
