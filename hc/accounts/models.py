@@ -56,13 +56,76 @@ class Profile(models.Model):
     def send_report(self):
         # reset next report date first:
         now = timezone.now()
-        self.next_report_date = now + timedelta(minutes=1)
+        self.next_report_date = now + timedelta(days=30)
         self.save()
 
         token = signing.Signer().sign(uuid.uuid4())
         path = reverse("hc-unsubscribe-reports", args=[self.user.username])
         unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
 
+        ctx = {
+            "checks": self.user.check_set.order_by("created"),
+            "now": now,
+            "unsub_link": unsub_link
+        }
+
+        emails.report(self.user.email, ctx)
+
+    def send_daily_report(self):
+        """
+        Method used to send daily reports
+        """
+        # reset next report date first:
+        now = timezone.now()
+        self.next_report_date = now + timedelta(minutes=1)
+        self.save()
+        # get unique token
+        token = signing.Signer().sign(uuid.uuid4())
+        path = reverse("hc-unsubscribe-reports", args=[self.user.username])
+        unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
+        # data for email sending method
+        ctx = {
+            "checks": self.user.check_set.order_by("created"),
+            "now": now,
+            "unsub_link": unsub_link
+        }
+
+        emails.report(self.user.email, ctx)
+
+    def send_weekly_report(self):
+        """
+        Method used to send weekly reports
+        """
+        # reset next report date first:
+        now = timezone.now()
+        self.next_report_date = now + timedelta(days=7)
+        self.save()
+        # get unique token
+        token = signing.Signer().sign(uuid.uuid4())
+        path = reverse("hc-unsubscribe-reports", args=[self.user.username])
+        unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
+        # data for email sending method
+        ctx = {
+            "checks": self.user.check_set.order_by("created"),
+            "now": now,
+            "unsub_link": unsub_link
+        }
+
+        emails.report(self.user.email, ctx)
+
+    def send_monthly_report(self):
+        """
+        Method used to send monthly reports
+        """
+        # reset next report date first:
+        now = timezone.now()
+        self.next_report_date = now + timedelta(days=30)
+        self.save()
+        # get unique token
+        token = signing.Signer().sign(uuid.uuid4())
+        path = reverse("hc-unsubscribe-reports", args=[self.user.username])
+        unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
+        # data for email sending method
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
