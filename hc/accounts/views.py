@@ -17,6 +17,8 @@ from hc.accounts.forms import (EmailPasswordForm, InviteTeamMemberForm,
 from hc.accounts.models import Profile, Member
 from hc.api.models import Channel, Check
 from hc.lib.badges import get_badge_url
+from datetime import timedelta
+from django.utils import timezone
 
 
 def _make_user(email):
@@ -158,6 +160,16 @@ def profile(request):
             if form.is_valid():
                 profile.reports_allowed = form.cleaned_data["reports_allowed"]
                 profile.save()
+                now = timezone.now()
+                if profile.reports_allowed == "daily":
+                    profile.next_report_date = now + timedelta(days=1)
+                    profile.save()
+                if profile.reports_allowed == "weekly":
+                    profile.next_report_date = now + timedelta(days=7)
+                    profile.save()
+                if profile.reports_allowed == "monthly":
+                    profile.next_report_date = now + timedelta(days=30)
+                    profile.save()
                 messages.success(request, "Your settings have been updated!")
         elif "invite_team_member" in request.POST:
             if not profile.team_access_allowed:
