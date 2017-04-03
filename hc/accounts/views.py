@@ -162,7 +162,7 @@ def profile(request):
                 profile.save()
                 now = timezone.now()
                 if profile.reports_allowed == "daily":
-                    profile.next_report_date = now + timedelta(days=1)
+                    profile.next_report_date = now + timedelta(minutes=1)
                     profile.save()
                 if profile.reports_allowed == "weekly":
                     profile.next_report_date = now + timedelta(days=7)
