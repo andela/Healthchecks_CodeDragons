@@ -26,25 +26,27 @@
                     {% csrf_token %}
                     <h2>Monthly Reports</h2>
                     <label>
+                        <!-- Radio button to select daily reports-->
                         <input
                             name="reports_allowed"
                             value="daily"
                             type="radio"
                             {% if profile.reports_allowed and reports_allowed == "daily" %} checked {% endif %}>
-                            Send me daily reports.<br>
-
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me daily reports.<br>
+                            <!-- Radio button to select weekly reports-->
                             <input
                             name="reports_allowed"
                             value="weekly"
                             type="radio"
                             {% if profile.reports_allowed and reports_allowed == "weekly" %} checked {% endif %}>
-                            Send me weekly reports.<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me weekly reports.<br>
+                            <!-- Radio button to select monthly reports-->
                             <input
                             name="reports_allowed"
                             value="monthly"
                             type="radio"
                             {% if profile.reports_allowed and reports_allowed == "monthly" %} checked {% endif %}>
-                            Send me monthly reports.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me monthly reports.
                     </label>
                     <button
                         name="update_reports_allowed"
@@ -75,6 +77,7 @@
 
   
 </div>
+<!--New row to handle bootstrap layout error-->
 <div class="row">
       <div class="col-sm-6">
         <div class="panel panel-default">
