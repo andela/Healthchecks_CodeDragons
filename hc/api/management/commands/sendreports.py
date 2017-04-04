@@ -101,11 +101,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-        Method to 
+        Method to control frequency of background worker
         """
-        if not options["loop"]:
-            return ("Sent %d daily reports\n %d weekly reports\n" +
-                    "%d monthly reports" % self.handle_one_run())
+        # if not options["loop"]:
+        #     return ("Sent %d daily reports\n %d weekly reports\n" +
+        #             "%d monthly reports" % self.handle_one_run())
 
         self.stdout.write("sendreports is now running")
         while True:
@@ -114,4 +114,4 @@ class Command(BaseCommand):
             formatted = timezone.now().isoformat()
             self.stdout.write("-- MARK %s --" % formatted)
 
-            time.sleep(300)
+            time.sleep(30)
