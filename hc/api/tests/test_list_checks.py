@@ -42,8 +42,17 @@ class ListChecksTestCase(BaseTestCase):
 
         checks = {check["name"]: check for check in doc["checks"]}
         self.assertTrue(len(checks) == 2)
-        self.assertTrue(("timeout" and "grace" and "ping_url" and "status" and "last_ping" and "n_pings" and "pause_url") in checks["Alice 1"].keys())
-        self.assertTrue(("timeout" and "grace" and "ping_url" and "status" and "last_ping" and "n_pings" and "pause_url") in checks["Alice 2"].keys())
+
+        self.assertTrue("timeout") and ("grace") in checks["Alice 1"].keys()
+        self.assertTrue("ping_url" and "status") in checks["Alice 1"].keys()
+        self.assertTrue("last_ping" and "n_pings") in checks["Alice 1"].keys()
+        self.assertTrue("pause_url") in checks["Alice 1"].keys()
+
+        self.assertTrue("timeout") and ("grace") in checks["Alice 2"].keys()
+        self.assertTrue("ping_url" and "status") in checks["Alice 2"].keys()
+        self.assertTrue("last_ping" and "n_pings") in checks["Alice 2"].keys()
+        self.assertTrue("pause_url") in checks["Alice 2"].keys()
+
         ### Assert the expected length of checks
         ### Assert the checks Alice 1 and Alice 2's timeout, grace, ping_url, status,
         ### last_ping, n_pings and pause_url
