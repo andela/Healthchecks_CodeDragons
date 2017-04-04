@@ -26,7 +26,7 @@ class SendAlertsTestCase(BaseTestCase):
         handled_names = []
         for args, kwargs in mock.call_args_list:
             handled_names.append(args[0].name)
-            handled_names.sort
+            handled_names.sort()
         assert set(names) == set(handled_names)
         ### The above assert fails. Make it pass
 
