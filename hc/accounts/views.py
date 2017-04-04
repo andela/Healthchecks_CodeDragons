@@ -19,6 +19,7 @@ from hc.api.models import Channel, Check
 from hc.lib.badges import get_badge_url
 from datetime import timedelta
 from django.utils import timezone
+from hc.api.management.commands import sendreports
 
 
 def _make_user(email):
@@ -174,6 +175,7 @@ def profile(request):
                     profile.next_report_date = now + timedelta(days=30)
                     profile.save()
                 messages.success(request, "Your settings have been updated!")
+                sendreports.handle()
         elif "invite_team_member" in request.POST:
             if not profile.team_access_allowed:
                 return HttpResponseForbidden()
