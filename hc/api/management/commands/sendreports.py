@@ -104,8 +104,7 @@ class Command(BaseCommand):
         Method to control frequency of background worker
         """
         if not options["loop"]:
-            return ("Sent %d daily reports\n %d weekly reports\n" +
-                    "%d monthly reports" % self.handle_one_run())
+            return "Sent %d daily reports\n %d weekly reports\n %d monthly reports" % self.handle_one_run()
 
         self.stdout.write("sendreports is now running")
         while True:
