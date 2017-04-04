@@ -1,5 +1,6 @@
 import uuid
 import re
+from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
@@ -8,6 +9,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.core import signing
 from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from django.shortcuts import redirect, render
@@ -17,9 +19,8 @@ from hc.accounts.forms import (EmailPasswordForm, InviteTeamMemberForm,
 from hc.accounts.models import Profile, Member
 from hc.api.models import Channel, Check
 from hc.lib.badges import get_badge_url
-from datetime import timedelta
-from django.utils import timezone
 from hc.api.management.commands import sendreports
+
 
 
 def _make_user(email):
