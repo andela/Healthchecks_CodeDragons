@@ -19,7 +19,7 @@ class Profile(models.Model):
     team_name = models.CharField(max_length=200, blank=True)
     team_access_allowed = models.BooleanField(default=False)
     next_report_date = models.DateTimeField(null=True, blank=True)
-    reports_allowed = models.CharField(max_length=20, default="monthly")
+    reports_allowed = models.CharField(max_length=20, default="FALSE")
     ping_log_limit = models.IntegerField(default=100)
     token = models.CharField(max_length=128, blank=True)
     api_key = models.CharField(max_length=128, blank=True)
@@ -87,7 +87,8 @@ class Profile(models.Model):
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
-            "unsub_link": unsub_link
+            "unsub_link": unsub_link,
+            "report_header": "This is a daily report sent by"
         }
 
         emails.report(self.user.email, ctx)
@@ -108,7 +109,8 @@ class Profile(models.Model):
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
-            "unsub_link": unsub_link
+            "unsub_link": unsub_link,
+            "report_header": "This is a weekly report sent by"
         }
 
         emails.report(self.user.email, ctx)
@@ -129,7 +131,8 @@ class Profile(models.Model):
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
-            "unsub_link": unsub_link
+            "unsub_link": unsub_link,
+            "report_header": "This is a monthly report sent by"
         }
 
         emails.report(self.user.email, ctx)
