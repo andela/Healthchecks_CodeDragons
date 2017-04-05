@@ -29,6 +29,7 @@ class ListChecksTestCase(BaseTestCase):
         self.a2.save()
 
     def get(self):
+        '''make request to access the api key from a list'''
         return self.client.get("/api/v1/checks/", HTTP_X_API_KEY="abc")
 
     def test_it_works(self):

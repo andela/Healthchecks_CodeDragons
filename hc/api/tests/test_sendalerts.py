@@ -1,5 +1,5 @@
 from datetime import timedelta
-
+from django.test import tag
 from django.utils import timezone
 from hc.api.management.commands.sendalerts import Command
 from hc.api.models import Check
@@ -23,10 +23,14 @@ class SendAlertsTestCase(BaseTestCase):
         result = Command().handle_many()
         assert result, "handle_many should return True"
 
-        handled_names = []
-        for args, kwargs in mock.call_args_list:
-            handled_names.append(args[0].name)
 
+        # handled_names = []
+        # for args, kwargs in mock.call_args_list:
+        #     handled_names.append(args[0].name)
+        handled_names = [args[0].name for args, kwargs in mock.call_args_list]
+        import pdb; pdb.set_trace()
+        #handled_names.sort()
+        print(handled_names)
         assert set(names) == set(handled_names)
         ### The above assert fails. Make it pass
 
