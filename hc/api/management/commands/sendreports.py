@@ -37,7 +37,7 @@ class Command(BaseCommand):
         # get time stamp for day before to
         # ensure user only gets email at the earliest at
         # least 1 day after subscribing
-        day_before = now - timedelta(minutes=1)
+        day_before = now - timedelta(days=1)
         # initialise db query conditions for next report date
         daily_report_due = Q(next_report_date__lt=now)
         daily_report_not_scheduled = Q(next_report_date__isnull=True)
@@ -59,7 +59,7 @@ class Command(BaseCommand):
         # get time stamp for week before to
         # ensure user only gets email at the earliest at
         # least 1 week after subscribing
-        week_before = now - timedelta(minutes=1)
+        week_before = now - timedelta(days=7)
         # initialise db query conditions for next report date
         week_report_due = Q(next_report_date__lt=now)
         week_report_not_scheduled = Q(next_report_date__isnull=True)
@@ -81,7 +81,7 @@ class Command(BaseCommand):
         # get time stamp for month before to
         # ensure user only gets email at the earliest at
         # least 1 month after subscribing
-        month_before = now - timedelta(minutes=1)
+        month_before = now - timedelta(days=30)
         # initialise db query conditions for next report date
         month_report_due = Q(next_report_date__lt=now)
         month_report_not_scheduled = Q(next_report_date__isnull=True)
