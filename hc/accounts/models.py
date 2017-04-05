@@ -19,6 +19,7 @@ class Profile(models.Model):
     team_name = models.CharField(max_length=200, blank=True)
     team_access_allowed = models.BooleanField(default=False)
     next_report_date = models.DateTimeField(null=True, blank=True)
+    # changed reports_allowed field to chartype
     reports_allowed = models.CharField(max_length=20, default="FALSE")
     ping_log_limit = models.IntegerField(default=100)
     token = models.CharField(max_length=128, blank=True)
@@ -84,6 +85,7 @@ class Profile(models.Model):
         path = reverse("hc-unsubscribe-reports", args=[self.user.username])
         unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
         # data for email sending method
+        # customized report and subject headers
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
@@ -107,6 +109,7 @@ class Profile(models.Model):
         path = reverse("hc-unsubscribe-reports", args=[self.user.username])
         unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
         # data for email sending method
+         # customized report and subject headers
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
@@ -130,6 +133,7 @@ class Profile(models.Model):
         path = reverse("hc-unsubscribe-reports", args=[self.user.username])
         unsub_link = "%s%s?token=%s" % (settings.SITE_ROOT, path, token)
         # data for email sending method
+        # customized report and subject headers
         ctx = {
             "checks": self.user.check_set.order_by("created"),
             "now": now,
