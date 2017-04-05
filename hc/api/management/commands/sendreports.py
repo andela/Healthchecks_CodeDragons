@@ -51,6 +51,7 @@ class Command(BaseCommand):
         for profile in daily:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
+                # terminal output for daily report
                 daily_tmpl = "Sending daily report to %s"
                 self.stdout.write(daily_tmpl % profile.user.email)
                 profile.send_daily_report()
@@ -73,6 +74,7 @@ class Command(BaseCommand):
         for profile in weekly:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
+                # terminal output for weekly report
                 weekly_tmpl = "Sending weekly report to %s"
                 self.stdout.write(weekly_tmpl % profile.user.email)
                 profile.send_weekly_report()
@@ -95,6 +97,7 @@ class Command(BaseCommand):
         for profile in monthly:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
+                # terminal output for monthly report
                 monthly_tmpl = "Sending monthly report to %s"
                 self.stdout.write(monthly_tmpl % profile.user.email)
                 profile.send_monthly_report()
@@ -107,7 +110,9 @@ class Command(BaseCommand):
         Method to control frequency of background worker
         """
         if not options["loop"]:
-            return "Sent %d daily reports\n %d weekly reports\n %d monthly reports" % self.handle_one_run()
+            # configure return statement based on report type
+            return ("Sent %d daily reports\n %d weekly reports\n %d monthly reports"
+                    % self.handle_one_run())
 
         self.stdout.write("sendreports is now running")
         while True:
