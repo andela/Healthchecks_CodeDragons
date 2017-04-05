@@ -16,7 +16,7 @@ def num_pinged_checks(profile):
 
 class Command(BaseCommand):
     help = 'Send due monthly reports'
-    tmpl = "Sending monthly report to %s"
+    
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -51,7 +51,8 @@ class Command(BaseCommand):
         for profile in daily:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
-                self.stdout.write(self.tmpl % profile.user.email)
+                daily_tmpl = "Sending daily report to %s"
+                self.stdout.write(daily_tmpl % profile.user.email)
                 profile.send_daily_report()
                 daily_sent += 1
 
@@ -72,7 +73,8 @@ class Command(BaseCommand):
         for profile in weekly:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
-                self.stdout.write(self.tmpl % profile.user.email)
+                weekly_tmpl = "Sending weekly report to %s"
+                self.stdout.write(weekly_tmpl % profile.user.email)
                 profile.send_weekly_report()
                 weekly_sent += 1
 
@@ -93,7 +95,8 @@ class Command(BaseCommand):
         for profile in monthly:
             # send email only if there were checks for current user
             if num_pinged_checks(profile) > 0:
-                self.stdout.write(self.tmpl % profile.user.email)
+                monthly_tmpl = "Sending monthly report to %s"
+                self.stdout.write(monthly_tmpl % profile.user.email)
                 profile.send_monthly_report()
                 monthly_sent += 1
 
