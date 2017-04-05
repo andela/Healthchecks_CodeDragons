@@ -165,15 +165,15 @@ def profile(request):
                 now = timezone.now()
                 # set next report date for daily reports
                 if profile.reports_allowed == "daily":
-                    profile.next_report_date = now + timedelta(minutes=1)
+                    profile.next_report_date = now + timedelta(days=1)
                     profile.save()
                 # set next report date for weekly reports
                 if profile.reports_allowed == "weekly":
-                    profile.next_report_date = now + timedelta(minutes=1)
+                    profile.next_report_date = now + timedelta(days=7)
                     profile.save()
                 # set next report date for monthly reports
                 if profile.reports_allowed == "monthly":
-                    profile.next_report_date = now + timedelta(minutes=1)
+                    profile.next_report_date = now + timedelta(days=30)
                     profile.save()
                 messages.success(request, "Your settings have been updated!")
 
