@@ -169,11 +169,11 @@ def profile(request):
                     profile.save()
                 # set next report date for weekly reports
                 if profile.reports_allowed == "weekly":
-                    profile.next_report_date = now + timedelta(days=7)
+                    profile.next_report_date = now + timedelta(minutes=1)
                     profile.save()
                 # set next report date for monthly reports
                 if profile.reports_allowed == "monthly":
-                    profile.next_report_date = now + timedelta(days=30)
+                    profile.next_report_date = now + timedelta(minutes=1)
                     profile.save()
                 messages.success(request, "Your settings have been updated!")
 
@@ -271,7 +271,7 @@ def unsubscribe_reports(request, username):
         return HttpResponseBadRequest()
 
     user = User.objects.get(username=username)
-    user.profile.reports_allowed = "FIRST"
+    user.profile.reports_allowed = "FALSE"
     user.profile.save()
 
     return render(request, "accounts/unsubscribed.html")
