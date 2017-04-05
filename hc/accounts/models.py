@@ -88,7 +88,8 @@ class Profile(models.Model):
             "checks": self.user.check_set.order_by("created"),
             "now": now,
             "unsub_link": unsub_link,
-            "report_header": "This is a daily report sent by"
+            "report_header": "This is a daily report sent by ",
+            "subject_header": "Daily Report"
         }
 
         emails.report(self.user.email, ctx)
@@ -110,7 +111,8 @@ class Profile(models.Model):
             "checks": self.user.check_set.order_by("created"),
             "now": now,
             "unsub_link": unsub_link,
-            "report_header": "This is a weekly report sent by"
+            "report_header": "This is a weekly report sent by ",
+            "subject_header": "Weekly Report"
         }
 
         emails.report(self.user.email, ctx)
@@ -132,7 +134,8 @@ class Profile(models.Model):
             "checks": self.user.check_set.order_by("created"),
             "now": now,
             "unsub_link": unsub_link,
-            "report_header": "This is a monthly report sent by"
+            "report_header": "This is a monthly report sent by ",
+            "subject_header": "Monthly Report"
         }
 
         emails.report(self.user.email, ctx)
