@@ -100,7 +100,7 @@ class Profile(models.Model):
         """
         # reset next report date first:
         now = timezone.now()
-        self.next_report_date = now + timedelta(days=7)
+        self.next_report_date = now + timedelta(minutes=1)
         self.save()
         # get unique token
         token = signing.Signer().sign(uuid.uuid4())
@@ -123,7 +123,7 @@ class Profile(models.Model):
         """
         # reset next report date first:
         now = timezone.now()
-        self.next_report_date = now + timedelta(days=30)
+        self.next_report_date = now + timedelta(minutes=1)
         self.save()
         # get unique token
         token = signing.Signer().sign(uuid.uuid4())
