@@ -176,8 +176,7 @@ def profile(request):
                     profile.next_report_date = now + timedelta(days=30)
                     profile.save()
                 messages.success(request, "Your settings have been updated!")
-                command_object = sendreports.Command()
-                command_object.handle(loop=True)
+                
         elif "invite_team_member" in request.POST:
             if not profile.team_access_allowed:
                 return HttpResponseForbidden()
