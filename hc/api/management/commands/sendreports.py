@@ -76,10 +76,12 @@ class Command(BaseCommand):
         """
         Method to control frequency of background worker
         """
+
         if not options["loop"]:
             # configure return statement based on report type
-            return "Sent {} daily reports {} weekly reports and {} monthly reports" \
-                   .format(self.handle_one_run()[0], self.handle_one_run()[1], self.handle_one_run()[2])
+            result = self.handle_one_run()
+            return "Sent {0} daily reports {1} weekly reports and {2} monthly reports" \
+                   .format(result[0], result[1], result[2])
 
         self.stdout.write("sendreports is now running")
         while True:
