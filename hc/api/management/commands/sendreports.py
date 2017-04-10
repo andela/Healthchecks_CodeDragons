@@ -40,15 +40,15 @@ class Command(BaseCommand):
         # least 1 day after subscribing
         number_of_days = {
             "daily": 1,
-            "weekly": 7,
-            "monthly": 30
+            "weekly": 1,
+            "monthly": 1
         }
 
         sent_list = []
 
         for item in number_of_days.keys():
 
-            period_before = now - timedelta(days=number_of_days[item])
+            period_before = now - timedelta(minutes=number_of_days[item])
             # initialise db query conditions for next report date
             report_due = Q(next_report_date__lt=now)
             report_not_scheduled = Q(next_report_date__isnull=True)
