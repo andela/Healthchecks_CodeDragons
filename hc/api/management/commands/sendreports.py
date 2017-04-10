@@ -40,8 +40,8 @@ class Command(BaseCommand):
         # least 1 day after subscribing
         number_of_days = {
             "daily": 1,
-            "weekly": 1,
-            "monthly": 1
+            "weekly": 7,
+            "monthly": 30
         }
 
         sent_list = []
@@ -90,4 +90,4 @@ class Command(BaseCommand):
             formatted = timezone.now().isoformat()
             self.stdout.write("-- MARK %s --" % formatted)
 
-            time.sleep(30)
+            time.sleep(300)
