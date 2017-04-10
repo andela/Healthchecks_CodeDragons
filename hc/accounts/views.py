@@ -163,18 +163,21 @@ def profile(request):
                 profile.reports_allowed = form.cleaned_data["reports_allowed"]
                 profile.save()
                 now = timezone.now()
-                # set next report date for daily reports
-                if profile.reports_allowed == "daily":
-                    profile.next_report_date = now + timedelta(days=1)
-                    profile.save()
-                # set next report date for weekly reports
-                if profile.reports_allowed == "weekly":
-                    profile.next_report_date = now + timedelta(days=7)
-                    profile.save()
-                # set next report date for monthly reports
-                if profile.reports_allowed == "monthly":
-                    profile.next_report_date = now + timedelta(days=30)
-                    profile.save()
+
+                # declare number of days for each report type
+                report_days =   {
+                                "daily": 1,
+                                "weekly": 7,
+                                "monthly": 30                             
+                                }    
+
+                # set number of days based on report type
+                number_of_days = report_days[profile.reports_allowed]
+
+                # calculate next report date
+                profile.next_report_date = now + timedelta(days=number_of_days)
+
+                profile.save()
                 messages.success(request, "Your settings have been updated!")
 
         elif "invite_team_member" in request.POST:
