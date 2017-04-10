@@ -78,8 +78,8 @@ class Command(BaseCommand):
         """
         if not options["loop"]:
             # configure return statement based on report type
-            return "Sent %d daily reports %d weekly reports and %d monthly reports" \
-                   % self.handle_one_run()[0], self.handle_one_run()[1], self.handle_one_run()[2]
+            return "Sent {} daily reports {} weekly reports and {} monthly reports" \
+                   .format(self.handle_one_run()[0], self.handle_one_run()[1], self.handle_one_run()[2])
 
         self.stdout.write("sendreports is now running")
         while True:
