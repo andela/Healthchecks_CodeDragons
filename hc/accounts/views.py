@@ -167,8 +167,8 @@ def profile(request):
                 # declare number of days for each report type
                 report_days =   {
                                 "daily": 1,
-                                "weekly": 1,
-                                "monthly": 1                             
+                                "weekly": 7,
+                                "monthly": 30                             
                                 }    
 
                 # set number of days based on report type
