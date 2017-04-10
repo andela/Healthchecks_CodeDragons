@@ -91,7 +91,7 @@ class Profile(models.Model):
             "now": now,
             "unsub_link": unsub_link,
             "report_header": "This is a " + item + " report sent by ",
-            "subject_header": + item.capitalize() + " Report"
+            "subject_header": item.capitalize() + " Report"
         }
 
         emails.report(self.user.email, ctx)
