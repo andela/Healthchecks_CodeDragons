@@ -91,11 +91,11 @@ class Profile(models.Model):
             "now": now,
             "unsub_link": unsub_link,
             "report_header": "This is a " + item + " report sent by ",
-            "subject_header": + item + " Report"
+            "subject_header": + item.capitalize() + " Report"
         }
 
         emails.report(self.user.email, ctx)
-        
+
     def invite(self, user):
         member = Member(team=self, user=user)
         member.save()
