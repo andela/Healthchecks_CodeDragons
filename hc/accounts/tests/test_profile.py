@@ -31,7 +31,7 @@ class ProfileTestCase(BaseTestCase):
         check = Check(name="Test Check", user=self.alice)
         check.save()
 
-        self.alice.profile.send_email_report("monthly", 30)
+        self.alice.profile.send_email_report(30, "monthly")
 
         ###Assert that the email was sent and check email content
         self.assertEqual(len(mail.outbox), 1)
