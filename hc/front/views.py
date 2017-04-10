@@ -129,7 +129,6 @@ def reports(request):
 
     return render(request, "front/reports.html", ctx)
 
-
 def about(request):
     return render(request, "front/about.html", {"page": "about"})
 
