@@ -116,6 +116,19 @@ def docs_api(request):
 
     return render(request, "front/docs_api.html", ctx)
 
+def reports(request):
+    check = _welcome_check(request)
+
+    ctx = {
+        "page": "reports",
+        "section": "home",
+        "ping_endpoint": settings.PING_ENDPOINT,
+        "check": check,
+        "ping_url": check.url()
+    }
+
+    return render(request, "front/reports.html", ctx)
+
 
 def about(request):
     return render(request, "front/about.html", {"page": "about"})
