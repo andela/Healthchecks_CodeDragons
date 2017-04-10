@@ -71,6 +71,7 @@ class Profile(models.Model):
 
         emails.report(self.user.email, ctx)
 
+
     def invite(self, user):
         member = Member(team=self, user=user)
         member.save()
