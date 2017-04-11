@@ -55,32 +55,28 @@
                 </form>
             </div>
         </div>
-    </div>
-
-    <div class="col-sm-6">
+        <!--START new panel to configure na periods -->
         <div class="panel panel-default">
             <div class="panel-body settings-block">
                 <form method="post">
                     {% csrf_token %}
-                    <h2>Set Password</h2>
-                    Attach a password to your healthchecks.io account
-                    <button
-                        type="submit"
-                        name="set_password"
-                        class="btn btn-default pull-right">Set Password</button>
+                    <h2>Click below to adjust your nag period</h2>
+                    <p>
+                        <span
+                            data-url=""
+                            data-timeout=""
+                            data-grace=""
+                            class="timeout-grace">
+                            <br />
+                            <span class="checks-subline">  
+                            </span>
+                    </span>
+                </p>
                 </form>
             </div>
         </div>
-    </div>
-
-  
-
-  
-</div>
-<!--New row to handle bootstrap layout error-->
-<div class="row">
-      <div class="col-sm-6">
-        <div class="panel panel-default">
+        <!--END  new panel to configure nag periods-->
+                        <div class="panel panel-default">
             <div class="panel-body settings-block">
                 <h2>API Access</h2>
                 {% if profile.api_key %}
@@ -116,10 +112,24 @@
                 {% endif %}
             </div>
         </div>
+
     </div>
 
-      <div class="col-sm-6">
+    <div class="col-sm-6">
         <div class="panel panel-default">
+            <div class="panel-body settings-block">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2>Set Password</h2>
+                    Attach a password to your healthchecks.io account
+                    <button
+                        type="submit"
+                        name="set_password"
+                        class="btn btn-default pull-right">Set Password</button>
+                </form>
+            </div>
+        </div>
+                <div class="panel panel-default">
             <div class="panel-body settings-block">
                 <h2>Team Access</h2>
                 {% if profile.member_set.count %}
@@ -175,8 +185,12 @@
                 {% endif %}
             </div>
         </div>
+
     </div>
 
+  
+
+  
 </div>
 
 {% if badge_urls %}
