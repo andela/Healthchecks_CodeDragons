@@ -17,7 +17,6 @@ from hc.api.decorators import uuid_or_400
 from hc.api.models import DEFAULT_GRACE, DEFAULT_TIMEOUT, Channel, Check, Ping
 from hc.front.forms import (AddChannelForm, AddWebhookForm, NameTagsForm,
                             TimeoutForm)
-from hc.lib import badges
 # from itertools recipes:
 def pairwise(iterable):
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
