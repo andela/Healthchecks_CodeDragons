@@ -125,7 +125,7 @@ def reports(request):
         "check": check,
         "ping_url": check.url(),
     }
-    # import pdb; pdb.set_trace()
+
     return render(request, "front/reports.html", ctx)
 
 def about(request):
