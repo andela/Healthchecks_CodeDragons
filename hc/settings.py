@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
+import dj_database_url
 import os
 import warnings
 import dj_database_url
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -152,8 +154,15 @@ PUSHOVER_EMERGENCY_EXPIRATION = 86400
 PUSHBULLET_CLIENT_ID = None
 PUSHBULLET_CLIENT_SECRET = None
 
+
+# if os.path.exists(os.path.join(BASE_DIR, "hc/local_settings.py")):
+#     from .local_settings import *
+# else:
+#     warnings.warn("local_settings.py not found, using defaults")
+
 # # Allow all host hosts/domain names for this site
 ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com']
+
 
 # Parse database configuration from $DATABASE_URL
 # DATABASES = {'default': dj_database_url.config()}
@@ -162,6 +171,13 @@ DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# # try to load local_settings.py if it exists
+# try:
+#   from local_settings import *
+# except Exception as e:
+#   pass
 
 if os.path.exists(os.path.join(BASE_DIR, "hc/local_settings.py")):
     from hc.local_settings import *
