@@ -7,3 +7,7 @@ static-collected
 .vscode
 .DS_Store
 static/.DS_Store
+<<<<<<< HEAD
+=======
+.vscode/
+>>>>>>> 4003ba1d3c3a43b9ec79662e9b2d11d94d5d6111
