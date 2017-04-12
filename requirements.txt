@@ -1,15 +1,11 @@
 appdirs==1.4.3
-<<<<<<< HEAD
 astroid==1.4.9
-=======
->>>>>>> d10369b4b6f724e4e3ff03fb1ee17e28e4cea380
 boto==2.46.1
 cssselect==1.0.1
 cssutils==1.0.2
 dj-database-url==0.4.2
 Django==1.10
 django-appconf==1.0.1
-<<<<<<< HEAD
 django-compressor==2.1
 django-ses-backend==0.1.1
 djmail==0.11.0
@@ -31,7 +27,6 @@ rjsmin==1.0.12
 six==1.10.0
 whitenoise==3.3.0
 wrapt==1.10.8
-=======
 django-compressor==2.1.1
 django-ses-backend==0.1.1
 djmail==1.0.1
@@ -50,4 +45,3 @@ requests==2.13.0
 rjsmin==1.0.12
 sendgrid==3.6.5
 six==1.10.0
->>>>>>> d10369b4b6f724e4e3ff03fb1ee17e28e4cea380

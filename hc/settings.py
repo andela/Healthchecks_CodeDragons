@@ -161,7 +161,7 @@ PUSHBULLET_CLIENT_SECRET = None
 #     warnings.warn("local_settings.py not found, using defaults")
 
 # # Allow all host hosts/domain names for this site
-ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com/']
+ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com']
 
 
 # Parse database configuration from $DATABASE_URL
