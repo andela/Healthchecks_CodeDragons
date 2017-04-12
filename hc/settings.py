@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import dj_database_url
 import os
 import warnings
+import dj_database_url
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -83,12 +84,12 @@ TEST_RUNNER = 'hc.api.tests.CustomRunner'
 
 # Default database engine is SQLite. So one can just check out code,
 # install requirements.txt and do manage.py runserver and it works
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':   './hc.sqlite',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME':   './hc.sqlite',
+#     }
+# }
 
 # You can switch database engine to postgres or mysql using environment
 # variable 'DB'. Travis CI does this.
@@ -98,6 +99,7 @@ if os.environ.get("DB") == "postgres":
             'ENGINE':   'django.db.backends.postgresql',
             'NAME':     'hc',
             'USER':     'postgres',
+            'PASSWORD': 'root',
             'TEST': {'CHARSET': 'UTF8'}
         }
     }
@@ -135,7 +137,8 @@ STATICFILES_FINDERS = (
 )
 COMPRESS_OFFLINE = True
 
-EMAIL_BACKEND = "djmail.backends.default.EmailBackend"
+EMAIL_BACKEND="djmail.backends.default.EmailBackend"
+DJMAIL_REAL_BACKEND="django.core.mail.backends.console.EmailBackend"
 
 # Slack integration -- override these in local_settings
 SLACK_CLIENT_ID = None
@@ -151,6 +154,7 @@ PUSHOVER_EMERGENCY_EXPIRATION = 86400
 PUSHBULLET_CLIENT_ID = None
 PUSHBULLET_CLIENT_SECRET = None
 
+<<<<<<< HEAD
 # if os.path.exists(os.path.join(BASE_DIR, "hc/local_settings.py")):
 #     from .local_settings import *
 # else:
@@ -158,6 +162,10 @@ PUSHBULLET_CLIENT_SECRET = None
 
 # # Allow all host hosts/domain names for this site
 ALLOWED_HOSTS = ['hc-cd-view-reports.herokuapp.com/']
+=======
+# # Allow all host hosts/domain names for this site
+ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com/']
+>>>>>>> d10369b4b6f724e4e3ff03fb1ee17e28e4cea380
 
 # Parse database configuration from $DATABASE_URL
 # DATABASES = {'default': dj_database_url.config()}
@@ -167,8 +175,15 @@ DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+<<<<<<< HEAD
 # # try to load local_settings.py if it exists
 # try:
 #   from local_settings import *
 # except Exception as e:
 #   pass
+=======
+if os.path.exists(os.path.join(BASE_DIR, "hc/local_settings.py")):
+    from hc.local_settings import *
+else:
+    warnings.warn("local_settings.py not found, using defaults")
+>>>>>>> d10369b4b6f724e4e3ff03fb1ee17e28e4cea380

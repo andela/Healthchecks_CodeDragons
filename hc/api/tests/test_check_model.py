@@ -1,8 +1,11 @@
+""" 
+test check model
+"""
 from datetime import timedelta
-
 from django.test import TestCase
 from django.utils import timezone
 from hc.api.models import Check
+from django.test import tag
 
 
 class CheckModelTestCase(TestCase):
@@ -12,6 +15,11 @@ class CheckModelTestCase(TestCase):
 
         check.tags = " foo  bar "
         self.assertEquals(check.tags_list(), ["foo", "bar"])
+
+    def test_for_empty_string(self):
+        check = Check()
+        check.tags = ""
+        self.assertEquals(check.tags, "")
         ### Repeat above test for when check is an empty string
 
     def test_status_works_with_grace_period(self):
@@ -35,4 +43,9 @@ class CheckModelTestCase(TestCase):
         check.status = "paused"
         self.assertFalse(check.in_grace_period())
 
+    @tag("checkGP")
+    def test_new_check_is_not_in_grace_period(self):
+        check = Check()
+
+        self.assertFalse(check.in_grace_period())
     ### Test that when a new check is created, it is not in the grace period

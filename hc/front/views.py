@@ -17,8 +17,7 @@ from hc.api.decorators import uuid_or_400
 from hc.api.models import DEFAULT_GRACE, DEFAULT_TIMEOUT, Channel, Check, Ping
 from hc.front.forms import (AddChannelForm, AddWebhookForm, NameTagsForm,
                             TimeoutForm)
-
-
+from hc.lib import badges
 # from itertools recipes:
 def pairwise(iterable):
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
@@ -56,7 +55,6 @@ def my_checks(request):
         "grace_tags": grace_tags,
         "ping_endpoint": settings.PING_ENDPOINT
     }
-
     return render(request, "front/my_checks.html", ctx)
 
 
@@ -116,6 +114,19 @@ def docs_api(request):
 
     return render(request, "front/docs_api.html", ctx)
 
+
+def reports(request):
+    check = _welcome_check(request)
+
+    ctx = {
+        "page": "reports",
+        "section": "home",
+        "ping_endpoint": settings.PING_ENDPOINT,
+        "check": check,
+        "ping_url": check.url(),
+    }
+
+    return render(request, "front/reports.html", ctx)
 
 def about(request):
     return render(request, "front/about.html", {"page": "about"})

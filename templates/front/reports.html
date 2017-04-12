@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load compress staticfiles %}
+
+{% block title %}View Records - healthchecks.io{% endblock %}
+
+{% block content %}
+
+<div class="table-responsive">
+    <table class="table">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Last Ping</th>
+      <th>Date Created</th>
+      <th>Log</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+        <td><h2>{{check.get_status_display'}}</h2></td>
+        <td><h2>{{check.name}}</h2></td>
+        <td><h2>{{check.last_ping}}</h2></td>
+        <td><h3>{{check.created}}</h3></td>
+        <td><h2>{{check.grace}}</h2></td>
+    </tr>
+
+  </tbody>
+</table>
+
+{% block scripts %}
+{% compress js %}
+<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endcompress %}
+{% endblock %}
+{% endblock %}
+
+

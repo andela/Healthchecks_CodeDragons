@@ -1,5 +1,11 @@
+""" Changes made include:
+    - import client Module 
+    - import auth/user Module 
+    - import django.test/ tag module for testing individual files
+"""
 from django.conf import settings
 from django.core.signing import base64_hmac
+from django.test import tag
 
 from hc.api.models import Check
 from hc.test import BaseTestCase
@@ -14,11 +20,13 @@ class BadgeTestCase(BaseTestCase):
     def test_it_rejects_bad_signature(self):
         r = self.client.get("/badge/%s/12345678/foo.svg" % self.alice.username)
         ### Assert the expected response status code
+        self.assertNotEqual(r.status_code, 200)
 
     def test_it_returns_svg(self):
         sig = base64_hmac(str(self.alice.username), "foo", settings.SECRET_KEY)
         sig = sig[:8].decode("utf-8")
         url = "/badge/%s/%s/foo.svg" % (self.alice.username, sig)
 
-        r = self.client.get(url)
+        response = self.client.get(url)
         ### Assert that the svg is returned
+        self.assertEqual(response.status_code, 200)

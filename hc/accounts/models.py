@@ -10,7 +10,7 @@ from django.core import signing
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from hc.lib import emails
+from hc.lib import emails, badges
 
 
 class Profile(models.Model):
@@ -53,10 +53,10 @@ class Profile(models.Model):
         self.api_key = base64.urlsafe_b64encode(os.urandom(24))
         self.save()
 
-    def send_report(self):
+    def send_report(self, period):
         # reset next report date first:
         now = timezone.now()
-        self.next_report_date = now + timedelta(days=30)
+        self.next_report_date = now + timedelta(minutes=period)
         self.save()
 
         token = signing.Signer().sign(uuid.uuid4())
