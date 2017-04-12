@@ -153,7 +153,7 @@ PUSHBULLET_CLIENT_ID = None
 PUSHBULLET_CLIENT_SECRET = None
 
 # # Allow all host hosts/domain names for this site
-ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com/']
+ALLOWED_HOSTS = ['hc-codedragons-report.herokuapp.com']
 
 # Parse database configuration from $DATABASE_URL
 # DATABASES = {'default': dj_database_url.config()}
