@@ -87,6 +87,35 @@ $(function () {
         $("#update-timeout-grace").val(rounded);
     });
 
+    // logic for nag slider
+    var nagSlider = document.getElementById("nag-slider");
+    noUiSlider.create(nagSlider, {
+        start: [20],
+        connect: "lower",
+        range: {
+            'min': [1800, 1800],
+            '33%': [10800, 10800],
+            '66%': [25200, 25200],
+            '83%': [32400, 32400],
+            'max': 43200,
+        },
+        pips: {
+            mode: 'values',
+            values: [1800, 7200, 10800, 18000, 25200, 32400, 43200],
+            density: 4,
+            format: {
+                to: secsToText,
+                from: function() {}
+            }
+        }
+    });
+
+    nagSlider.noUiSlider.on("update", function(a, b, value) {
+        var rounded = Math.round(value);
+        $("#nag-slider-value").text(secsToText(rounded));
+        $("#update-timeout-nag").val(rounded);
+    });
+
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -104,10 +133,10 @@ $(function () {
 
     $(".timeout-grace").click(function() {
         var $this = $(this);
-
         $("#update-timeout-form").attr("action", $this.data("url"));
         periodSlider.noUiSlider.set($this.data("timeout"))
         graceSlider.noUiSlider.set($this.data("grace"))
+        nagSlider.noUiSlider.set($this.data("nag"))
         $('#update-timeout-modal').modal({"show":true, "backdrop":"static"});
 
         return false;
