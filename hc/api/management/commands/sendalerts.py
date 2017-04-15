@@ -20,7 +20,7 @@ class Command(BaseCommand):
         query = Check.objects.filter(user__isnull=False).select_related("user")
 
         time_array = str(Check.nag_interval).split(":")
-        nag_interval_seconds = int(time_array[0]) * 3600 + int(time_array[1]) * 60 + int(time_array[2])
+        nag_interval_seconds = float(time_array[0]) * 3600 + float(time_array[1]) * 60 + float(time_array[2])
 
         due_nag_alerts = Check.last_alert + timedelta(seconds=nag_interval_seconds)
 
