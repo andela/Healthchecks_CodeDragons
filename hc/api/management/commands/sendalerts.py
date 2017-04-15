@@ -4,6 +4,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from django.core.management.base import BaseCommand
 from django.db import connection
+from datetime import timedelta
 from django.utils import timezone
 from hc.api.models import Check
 
@@ -17,12 +18,13 @@ class Command(BaseCommand):
     def handle_many(self):
         """ Send alerts for many checks simultaneously. """
         query = Check.objects.filter(user__isnull=False).select_related("user")
-
+        due_nag_alerts = Check.last_alert + timedelta(days=Check.nag_interval)
         now = timezone.now()
         going_down = query.filter(alert_after__lt=now, status="up")
         going_up = query.filter(alert_after__gt=now, status="down")
+        going_nag = query.filter(due_nag_alerts__gt=now, status="nag")
         # Don't combine this in one query so Postgres can query using index:
-        checks = list(going_down.iterator()) + list(going_up.iterator())
+        checks = list(going_down.iterator()) + list(going_up.iterator()) + list(going_nag.iterator())
         if not checks:
             return False
 
