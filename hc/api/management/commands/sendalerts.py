@@ -19,7 +19,12 @@ class Command(BaseCommand):
         """ Send alerts for many checks simultaneously. """
         query = Check.objects.filter(user__isnull=False).select_related("user")
 
-        due_nag_alerts = Check.last_alert + timedelta(hours=Check.nag_interval)
+        time_array = str(Check.nag_interval).split()
+        nag_interval_seconds = int(time_array[0]) * 3600 + int(time_array[1]) * 60 + int(time_array[2])
+
+        num_minutes = int(time.mktime(Check.nag_interval.timetuple())) / 60
+
+        due_nag_alerts = Check.last_alert + timedelta(seconds=nag_interval_seconds)
 
         now = timezone.now()
         going_down = query.filter(alert_after__lt=now, status="up")
