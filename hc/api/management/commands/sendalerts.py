@@ -21,7 +21,7 @@ class Command(BaseCommand):
         #nag_interval_seconds = sum(int(x) * 60 ** i for i,x in enumerate(reversed(str(Check.nag_interval).split(":"))))
         time_array = str(Check.nag_interval).split(":")
         # nag_interval_seconds = float(time_array[0]) * 3600 + float(time_array[1]) * 60 + float(time_array[2])
-        print(time_array[0],time_array[1],time_array[2])
+        print(time_array)
 
         due_nag_alerts = Check.last_alert + timedelta(seconds=nag_interval_seconds)
 
