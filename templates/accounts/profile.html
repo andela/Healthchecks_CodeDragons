@@ -55,27 +55,7 @@
                 </form>
             </div>
         </div>
-        <!--START new panel to configure na periods -->
-        <div class="panel panel-default">
-            <div class="panel-body settings-block">
-                <form method="post">
-                    {% csrf_token %}
-                    <h2>Click below to adjust your nag period</h2>
-                    <p>
-                        <span
-                            data-url=""
-                            data-timeout=""
-                            data-grace=""
-                            class="timeout-grace">
-                            <br />
-                            <span class="checks-subline">  
-                            </span>
-                    </span>
-                </p>
-                </form>
-            </div>
-        </div>
-        <!--END  new panel to configure nag periods-->
+
                         <div class="panel panel-default">
             <div class="panel-body settings-block">
                 <h2>API Access</h2>
@@ -359,6 +339,8 @@
 {% compress js %}
 <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/nouislider.min.js' %}"></script>
+<script src="{% static 'js/clipboard.min.js' %}"></script>
 <script src="{% static 'js/profile.js' %}"></script>
 {% endcompress %}
 {% endblock %}
