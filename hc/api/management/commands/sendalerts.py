@@ -18,7 +18,7 @@ class Command(BaseCommand):
     def handle_many(self):
         """ Send alerts for many checks simultaneously. """
         query = Check.objects.filter(user__isnull=False).select_related("user")
-        nag_interval_seconds = sum(int(x) * 60 ** i for i,x in enumerate(reversed(str(Check.nag_interval.split(":"))))
+        nag_interval_seconds = sum(int(x) * 60 ** i for i,x in enumerate(reversed(str(Check.nag_interval.split(":")))))
         # time_array = str(Check.nag_interval).split(":")
         # nag_interval_seconds = float(time_array[0]) * 3600 + float(time_array[1]) * 60 + float(time_array[2])
 
