@@ -12,12 +12,13 @@ from django.urls import reverse
 from django.utils import timezone
 from hc.api import transports
 from hc.lib import emails
-
+# add new status type
 STATUSES = (
     ("up", "Up"),
     ("down", "Down"),
     ("new", "New"),
-    ("paused", "Paused")
+    ("paused", "Paused"),
+    ("nag", "Nag")
 )
 DEFAULT_TIMEOUT = td(days=1)
 DEFAULT_GRACE = td(hours=1)
@@ -55,6 +56,8 @@ class Check(models.Model):
     status = models.CharField(max_length=6, choices=STATUSES, default="new")
     # field to store nag interval
     nag_interval = models.DurationField(default=DEFAULT_NAG_PERIOD)
+    # last time alert was sent
+    last_alert = models.DateTimeField(null=True)
 
     def name_then_code(self):
         if self.name:
@@ -72,7 +75,7 @@ class Check(models.Model):
         return "%s@%s" % (self.code, settings.PING_EMAIL_DOMAIN)
 
     def send_alert(self):
-        if self.status not in ("up", "down"):
+        if self.status not in ("up", "down", "nag"):
             raise NotImplementedError("Unexpected status: %s" % self.status)
 
         errors = []
