@@ -18,18 +18,11 @@ class Command(BaseCommand):
     def handle_many(self):
         """ Send alerts for many checks simultaneously. """
         query = Check.objects.filter(user__isnull=False).select_related("user")
-        #nag_interval_seconds = sum(int(x) * 60 ** i for i,x in enumerate(reversed(str(Check.nag_interval).split(":"))))
-        time_array = str(Check.nag_interval).split(":")
-        # nag_interval_seconds = float(time_array[0]) * 3600 + float(time_array[1]) * 60 + float(time_array[2])
-        print(time_array)
-
-        due_nag_alerts = Check.last_alert + timedelta(seconds=nag_interval_seconds)
-
+   
         now = timezone.now()
         going_down = query.filter(alert_after__lt=now, status="up")
         going_up = query.filter(alert_after__gt=now, status="down")
-
-        going_nag = query.filter(due_nag_alerts__gt=now, status="nag")
+        going_nag = query.filter(last_alert__lt=now - Check.nag_interval, status="nag")
 
         # Don't combine this in one query so Postgres can query using index:
         checks = list(going_down.iterator()) + list(going_up.iterator()) + list(going_nag.iterator())
