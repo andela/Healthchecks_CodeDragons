@@ -56,6 +56,7 @@ class Check(models.Model):
     status = models.CharField(max_length=6, choices=STATUSES, default="new")
     # field to store nag interval
     nag_interval = models.DurationField(default=DEFAULT_NAG_PERIOD)
+    nag_after = models.DateTimeField(null=True, blank=True)
     # last time alert was sent
     last_alert = models.DateTimeField(null=True)
 
@@ -135,6 +136,11 @@ class Check(models.Model):
             result["next_ping"] = None
 
         return result
+
+    def update_nag(self):
+        now = timezone.now()
+        self.nag_after = now + self.nag_interval
+        self.last_alert = now
 
 
 class Ping(models.Model):
