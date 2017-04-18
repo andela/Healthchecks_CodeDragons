@@ -27,26 +27,34 @@
                     <h2>Select Your Report Type:</h2>
                     <label>
                         <!-- Radio button to select daily reports-->
-                        <input
+                        <!--<input
                             name="reports_allowed"
                             value="daily"
                             type="radio"
-                            {% if profile.reports_allowed and reports_allowed == "daily" %} checked {% endif %}>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me daily reports.<br>
+                            >-->
+                            <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me daily reports.<br>-->
                             <!-- Radio button to select weekly reports-->
-                            <input
+                            <!--<input
                             name="reports_allowed"
                             value="weekly"
                             type="radio"
-                            {% if profile.reports_allowed and reports_allowed == "weekly" %} checked {% endif %}>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me weekly reports.<br>
+                            >-->
+                            <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me weekly reports.<br>-->
                             <!-- Radio button to select monthly reports-->
-                            <input
+                            <!--<input
                             name="reports_allowed"
                             value="monthly"
                             type="radio"
-                            {% if profile.reports_allowed and reports_allowed == "monthly" %} checked {% endif %}>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me monthly reports.
+                            >-->
+                            <input type="radio"
+                            name="reports_allowed"
+                            value="daily"
+                            name="reports_allowed"
+                            value="weekly"      
+                            name="reports_allowed"
+                            value="weekly"                       
+                            >
+                            <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send me monthly reports.-->
                     </label>
                     <button
                         name="update_reports_allowed"
